@@ -1,0 +1,14 @@
+{
+  "name": "icecave",
+  "version": "1.0.0",
+  "description": "Super lightweight alternative DB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "immutable": "^3.7.6"
+  }
+}
