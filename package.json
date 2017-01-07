@@ -1,13 +1,14 @@
 {
   "name": "icecave",
   "version": "1.0.0",
-  "description": "Super lightweight alternative DB",
-  "main": "index.js",
+  "description": "Fast and simple flat file storage for small projects",
+  "keywords": ["flatfile", "database", "db", "lightweight", "storage", "immutable"],
+  "main": "icecave.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Lucian Buzzo <lucian.buzzo@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "immutable": "^3.7.6"
   }
