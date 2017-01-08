@@ -1,0 +1,37 @@
+# IceCave DB
+
+A super lightweight flat file storage system for nodejs.
+
+IceCave is designed for use in applications where relatively small amounts of
+data need to be permanently stored and a dedicated external database service is
+impractical or overkill.
+IceCave stores data in-memory and periodically dumps it's contents to
+a JSON file. On startup it will read this file location and load any data found
+there.
+
+IceCave stores data in an array-like collection and its API methods reflect that.
+IceCave intentionally offers a very limited set of methods and leaves it up to you,
+the developer, to build integrations that suit your application.
+
+# Documentation
+
+## Module interface
+
+{{#module name="icecave"}}
+{{>body~}}
+{{>member-index~}}
+{{>separator~}}
+{{>members~}}
+{{/module}}
+
+<a name="IceCave"></a>
+
+## IceCave instance
+
+{{#class name="IceCave"}}
+{{>body~}}
+{{>member-index~}}
+{{>separator~}}
+{{>members~}}
+{{/class}}
+

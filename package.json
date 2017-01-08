@@ -5,7 +5,8 @@
   "keywords": ["flatfile", "database", "db", "lightweight", "storage", "immutable"],
   "main": "icecave.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "readme": "jsdoc2md --template doc/README.hbs icecave.js > README.md"
   },
   "author": "Lucian Buzzo <lucian.buzzo@gmail.com>",
   "license": "MIT",

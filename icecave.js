@@ -75,6 +75,7 @@ class IceCave {
 
     /**
      * @summary Adds a value as the last item in the DB
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -94,6 +95,7 @@ class IceCave {
 
     /**
      * @summary Deletes the value at 'index'.
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -116,6 +118,7 @@ class IceCave {
 
     /**
      * @summary Sets a new value at 'index'.
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -139,6 +142,7 @@ class IceCave {
 
     /**
      * @summary Retrieves the value at 'index'.
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -159,6 +163,7 @@ class IceCave {
 
     /**
      * @summary Returns the first value for which the predicate 'fn' returns true.
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -182,6 +187,7 @@ class IceCave {
 
     /**
      * @summary Returns all values for which the predicate 'fn' returns true.
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -205,6 +211,7 @@ class IceCave {
 
     /**
      * @summary Returns the first value in storage
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -225,6 +232,7 @@ class IceCave {
 
     /**
      * @summary Returns the last value in storage
+     * @memberof IceCave
      * @public
      * @method
      *
@@ -267,6 +275,10 @@ class IceCave {
 }
 
 /**
+ * @module icecave
+ */
+
+/**
  * @summary Creates a new IceCave instance
  * @function
  * @public
@@ -284,6 +296,13 @@ class IceCave {
  * to "icecave".
  *
  * @return {IceCave} - An instance of an IceCave DB
+ *
+ * @example
+ * const IceCave = require('icecave');
+ *
+ * const storage = IceCave.create('./data-directory', 'storage');
+ *
+ * storage.push({ id: 1, name: 'Adam' });
  */
 exports.create = (dir, name = 'icecave') => {
   return new IceCave(dir, name);

@@ -4,7 +4,7 @@ A super lightweight flat file storage system for nodejs.
 
 IceCave is designed for use in applications where relatively small amounts of
 data need to be permanently stored and a dedicated external database service is
-impractical or overkill.  
+impractical or overkill.
 IceCave stores data in-memory and periodically dumps it's contents to
 a JSON file. On startup it will read this file location and load any data found
 there.
@@ -13,106 +13,180 @@ IceCave stores data in an array-like collection and its API methods reflect that
 IceCave intentionally offers a very limited set of methods and leaves it up to you,
 the developer, to build integrations that suit your application.
 
-## Methods
+# Documentation
 
-### Icecave.push(*element*)
+## Module interface
 
-Add a new element to the IceCave collection.
+<a name="module_icecave.create"></a>
 
-#### Arguments
+### icecave.create(dir, [name]) ⇒ <code>[IceCave](#IceCave)</code>
+Creates and returns a new IceCave instance. The instance will writedata to the directory specified by the `dir` parameter. You can optionallyspecify a name for the instance, If a name is not provided then the name willdefault to 'icecave'. The name is used to generate the storage flat file andshould be unique. For example if your IceCave DB has the name 'friends' thenit will write to a file named 'friends.json'.
 
-1. **mixed** The value to add to the collection
+**Kind**: static method of <code>[icecave](#module_icecave)</code>  
+**Summary**: Creates a new IceCave instance  
+**Returns**: <code>[IceCave](#IceCave)</code> - - An instance of an IceCave DB  
+**Access:** public  
 
-#### Returns
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| dir | <code>String</code> |  | Path to the directory where the DB data will be written. |
+| [name] | <code>String</code> | <code>&#x27;icecave&#x27;</code> | (Optional) The name of the DB, defaults to "icecave". |
 
-**Number**: The index of the inserted value
+**Example**  
+```js
+const IceCave = require('icecave');const storage = IceCave.create('./data-directory', 'storage');storage.push({ id: 1, name: 'Adam' });
+```
 
-### Icecave.remove(*index*)
+<a name="IceCave"></a>
 
-Remove an element from the IceCave collection at the given index.
+## IceCave instance
 
-#### Arguments
+**Kind**: global class  
+**Summary**: Create an instance of IceCave  
+**Access:** public  
 
-1. **Number** The index to remove from the collection
+* [IceCave](#IceCave)
+    * [new IceCave(dir, name)](#new_IceCave_new)
+    * [.push(val)](#IceCave.push) ⇒ <code>Number</code>
+    * [.remove(index)](#IceCave.remove) ⇒ <code>void</code>
+    * [.set(index, val)](#IceCave.set) ⇒ <code>Void</code>
+    * [.get(index)](#IceCave.get) ⇒ <code>\*</code>
+    * [.find(fn)](#IceCave.find) ⇒ <code>\*</code>
+    * [.filter(fn)](#IceCave.filter) ⇒ <code>Array</code>
+    * [.first()](#IceCave.first) ⇒ <code>\*</code>
+    * [.last()](#IceCave.last) ⇒ <code>\*</code>
 
-#### Returns
+<a name="new_IceCave_new"></a>
 
-Nothing
+### new IceCave(dir, name)
+IceCave stores data in memory in an Immutable JS "list" structure(similar to an array). This data is then periodically written to a flat file as JSON.When a DB is created it will try to load the a JSON file from the locationspecified by the 'dir' and 'name' parameters, otherwise it will start a new"list" structure.This class can only be Instantiated through the 'create' method exposed bythis module.
 
-### Icecave.set(*index*, *element*)
+**Returns**: <code>[IceCave](#IceCave)</code> - - Instance of IceCave  
 
-Overwrite an element from the IceCave collection at the given index.
+| Param | Type | Description |
+| --- | --- | --- |
+| dir | <code>String</code> | Path to the directory where the DB data will be written. |
+| name | <code>String</code> | The name of the DB |
 
-#### Arguments
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');
+```
+<a name="IceCave.push"></a>
 
-1. **Number** The index to insert the element at
-2. **mixes** The element to insert into the collection
+### IceCave.push(val) ⇒ <code>Number</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Adds a value as the last item in the DB  
+**Returns**: <code>Number</code> - - The index of the new value  
+**Access:** public  
 
-#### Returns
+| Param | Type | Description |
+| --- | --- | --- |
+| val | <code>\*</code> | The value to store. |
 
-Nothing
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });
+```
+<a name="IceCave.remove"></a>
 
-### Icecave.get(*index*)
+### IceCave.remove(index) ⇒ <code>void</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Deletes the value at 'index'.  
+**Access:** public  
 
-Retrieve an element from the IceCave collection at the given index.
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>Number</code> | The index of the item to delete |
 
-#### Arguments
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });// ...storage.remove(index);
+```
+<a name="IceCave.set"></a>
 
-1. **Number** The index to retrieve the element from 
+### IceCave.set(index, val) ⇒ <code>Void</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Sets a new value at 'index'.  
+**Access:** public  
 
-#### Returns
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>Number</code> | The index to set the new value at. |
+| val | <code>\*</code> | The val to set |
 
-The element at the given index.
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });// ...storage.set(index, { hello: 'world' });
+```
+<a name="IceCave.get"></a>
 
-### Icecave.find(*predicate*)
+### IceCave.get(index) ⇒ <code>\*</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Retrieves the value at 'index'.  
+**Returns**: <code>\*</code> - - The value at the specified index  
+**Access:** public  
 
-Iterates over elements of the IceCave collection, returning the first element *predicate* 
-returns truthy for. The predicate is invoked with the element currently being
-evaluated.
+| Param | Type | Description |
+| --- | --- | --- |
+| index | <code>Number</code> | The index that should be retrieved. |
 
-#### Arguments
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });// ...storage.get(index); // --> { foo: 'bar' }
+```
+<a name="IceCave.find"></a>
 
-1. **Function** The function invoked per iteration 
+### IceCave.find(fn) ⇒ <code>\*</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Returns the first value for which the predicate 'fn' returns true.  
+**Returns**: <code>\*</code> - - The first value that matches the predicate.  
+**Access:** public  
 
-#### Returns
+| Param | Type | Description |
+| --- | --- | --- |
+| fn | <code>function</code> | fn(item): Predicate function that is provided with the current item and should return a boolean value |
 
-The matched element, else undefined.
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const user = storage.find(item => item.id === 2); // --> { id: 2, name: 'Ben' }
+```
+<a name="IceCave.filter"></a>
 
-### Icecave.filter(*predicate*)
+### IceCave.filter(fn) ⇒ <code>Array</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Returns all values for which the predicate 'fn' returns true.  
+**Returns**: <code>Array</code> - - The values that match the predicate.  
+**Access:** public  
 
-Iterates over elements of the IceCave collection, returning an array of all 
-elements predicate returns truthy for. The predicate is invoked with the element 
-currently being evaluated.
+| Param | Type | Description |
+| --- | --- | --- |
+| fn | <code>function</code> | fn(item): Predicate function that is provided with the current item and should return a boolean value |
 
-#### Arguments
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.filter(item => item.id > 1); // --> [{ id: 2, name: 'Ben' }, { id: 3, name: 'Chris' }]
+```
+<a name="IceCave.first"></a>
 
-1. **Function** The function invoked per iteration 
+### IceCave.first() ⇒ <code>\*</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Returns the first value in storage  
+**Returns**: <code>\*</code> - - The first value in storage  
+**Access:** public  
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.first(); // --> { id: 1, name: 'Adam' }
+```
+<a name="IceCave.last"></a>
 
-#### Returns
-
-The new filtered array.
-
-### Icecave.first()
-
-Gets the first element in the IceCave collection.
-
-#### Arguments
-
-None
-
-#### Returns
-
-Returns the first element in the IceCave collection.
-
-### Icecave.last()
-
-Gets the last element in the IceCave collection.
-
-#### Arguments
-
-None
-
-#### Returns
-
-Returns the last element in the IceCave collection.
+### IceCave.last() ⇒ <code>\*</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Returns the last value in storage  
+**Returns**: <code>\*</code> - - The last value in storage  
+**Access:** public  
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.last(); // --> { id: 3, name: 'Chris' }
+```
 
