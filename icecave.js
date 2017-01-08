@@ -28,7 +28,7 @@ class IceCave {
    */
   constructor(dir, name) {
     if (!fs.existsSync(dir)) {
-      throw new Error(`Whoops! The directory ${dir} doesn't exist.`);
+      throw new Error(`Whoops! The directory "${dir}" doesn't exist. Please create it and try again.`);
     }
 
     const writeInterval = 1000;
@@ -46,8 +46,12 @@ class IceCave {
      */
     const data = (() => {
       try {
-        return require(`${dir}/${name}.json`);
+        let flatFileData = fs.readFileSync(`${dir}/${name}.json`, 'utf8');
+        let parsed = JSON.parse(flatFileData);
+        console.log(`IceCave: Loading data from ${dir}/${name}.json`);
+        return parsed;
       } catch(e) {
+        console.log(`IceCave: No storage file found at ${dir}/${name}.json, starting a new collection`);
         return [];
       }
     })();
