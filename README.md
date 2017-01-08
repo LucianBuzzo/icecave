@@ -71,6 +71,7 @@ const IceCave = require('icecave');const storage = IceCave.create('./data-dire
     * [.set(index, val)](#IceCave.set) ⇒ <code>Void</code>
     * [.get(index)](#IceCave.get) ⇒ <code>\*</code>
     * [.find(fn)](#IceCave.find) ⇒ <code>\*</code>
+    * [.findIndex(fn)](#IceCave.findIndex) ⇒ <code>Number</code>
     * [.filter(fn)](#IceCave.filter) ⇒ <code>Array</code>
     * [.first()](#IceCave.first) ⇒ <code>\*</code>
     * [.last()](#IceCave.last) ⇒ <code>\*</code>
@@ -169,6 +170,22 @@ const storage = require('icecave').create('./data-directory');let index = stor
 **Example**  
 ```js
 const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const user = storage.find(item => item.id === 2); // --> { id: 2, name: 'Ben' }
+```
+<a name="IceCave.findIndex"></a>
+
+### IceCave.findIndex(fn) ⇒ <code>Number</code>
+**Kind**: static method of <code>[IceCave](#IceCave)</code>  
+**Summary**: Returns the first index where a value satisfies the provided predicate 'fn'  
+**Returns**: <code>Number</code> - - The index of the first value that matches the predicate. If an item is not found -1 is returned  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fn | <code>function</code> | fn(item): Predicate function that is provided with the current item and should return a boolean value |
+
+**Example**  
+```js
+const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const user = storage.findIndex(item => item.id === 2); // --> 1
 ```
 <a name="IceCave.filter"></a>
 

@@ -192,6 +192,30 @@ class IceCave {
     const find = (fn) => unpack(core.find((item) => fn(unpack(item))));
 
     /**
+     * @summary Returns the first index where a value satisfies the provided predicate 'fn'
+     * @memberof IceCave
+     * @public
+     * @method
+     *
+     * @param {Function} fn - fn(item): Predicate function that is provided with
+     * the current item and should return a boolean value
+     *
+     * @returns {Number} - The index of the first value that matches the predicate. If an item is not found -1 is returned
+     *
+     * @example
+     * const storage = require('icecave').create('./data-directory');
+     *
+     * storage.push({ id: 1, name: 'Adam' });
+     * storage.push({ id: 2, name: 'Ben' });
+     * storage.push({ id: 3, name: 'Chris' });
+     *
+     * // ...
+     *
+     * const user = storage.findIndex(item => item.id === 2); // --> 1
+     */
+    const findIndex = (fn) => unpack(core.findIndex((item) => fn(unpack(item))));
+
+    /**
      * @summary Returns all values for which the predicate 'fn' returns true.
      * @memberof IceCave
      * @public
