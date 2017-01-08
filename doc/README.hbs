@@ -13,6 +13,25 @@ IceCave stores data in an array-like collection and its API methods reflect that
 IceCave intentionally offers a very limited set of methods and leaves it up to you,
 the developer, to build integrations that suit your application.
 
+# Usage
+
+Below is a quick example how to use IceCave DB:
+
+```js
+const IceCave = require('icecave');
+
+// Create a new storage instance that will be written to the directory './data-directory'
+const storage = IceCave.create('./data-directory', 'storage');
+
+// Add items to the database
+storage.push({ id: 1, name: 'Adam' });
+storage.push({ id: 2, name: 'Ben' });
+storage.push({ id: 3, name: 'Chris' });
+
+// Find an item in the database
+const user = storage.find(item => item.id === 2); // --> { id: 2, name: 'Ben' }
+```
+
 # Documentation
 
 ## Module interface
