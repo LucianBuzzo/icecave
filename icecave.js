@@ -27,9 +27,11 @@ class IceCave {
    * const storage = require('icecave').create('./data-directory');
    */
   constructor(dir, name) {
+    if (!fs.existsSync(dir)) {
+      throw new Error(`Whoops! The directory ${dir} doesn't exist.`);
+    }
+
     const writeInterval = 1000;
-    const dir = dir;
-    const name = name;
 
     const getName = () => name;
     const getDir = () => dir;
@@ -256,7 +258,7 @@ class IceCave {
      * @private
      */
     const write = () => {
-      fs.writeFile('${dir}/${name}.json', JSON.stringify(core.toJS()));
+      fs.writeFile(`${dir}/${name}.json`, JSON.stringify(core.toJS()));
     };
 
     setInterval(write, writeInterval);
