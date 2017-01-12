@@ -24,7 +24,7 @@ class IceCave {
    * @returns {IceCave} - Instance of IceCave
    *
    * @example
-   * const storage = require('icecave').create('./data-directory');
+   * const storage = require('icecave').create(__dirname + '/data-directory');
    */
   constructor(dir, name) {
     if (!fs.existsSync(dir)) {
@@ -90,7 +90,7 @@ class IceCave {
      * @returns {Number} - The index of the new value
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * let index = storage.push({ foo: 'bar' });
      */
@@ -110,7 +110,7 @@ class IceCave {
      * @returns {void}
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * let index = storage.push({ foo: 'bar' });
      *
@@ -134,7 +134,7 @@ class IceCave {
      * @returns {Void}
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * let index = storage.push({ foo: 'bar' });
      *
@@ -157,7 +157,7 @@ class IceCave {
      * @returns {*} - The value at the specified index
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * let index = storage.push({ foo: 'bar' });
      *
@@ -179,7 +179,7 @@ class IceCave {
      * @returns {*} - The first value that matches the predicate.
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * storage.push({ id: 1, name: 'Adam' });
      * storage.push({ id: 2, name: 'Ben' });
@@ -203,7 +203,7 @@ class IceCave {
      * @returns {Number} - The index of the first value that matches the predicate. If an item is not found -1 is returned
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * storage.push({ id: 1, name: 'Adam' });
      * storage.push({ id: 2, name: 'Ben' });
@@ -227,7 +227,7 @@ class IceCave {
      * @returns {Array} - The values that match the predicate.
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * storage.push({ id: 1, name: 'Adam' });
      * storage.push({ id: 2, name: 'Ben' });
@@ -248,7 +248,7 @@ class IceCave {
      * @returns {*} - The first value in storage
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * storage.push({ id: 1, name: 'Adam' });
      * storage.push({ id: 2, name: 'Ben' });
@@ -269,7 +269,7 @@ class IceCave {
      * @returns {*} - The last value in storage
      *
      * @example
-     * const storage = require('icecave').create('./data-directory');
+     * const storage = require('icecave').create(__dirname + '/data-directory');
      *
      * storage.push({ id: 1, name: 'Adam' });
      * storage.push({ id: 2, name: 'Ben' });
@@ -330,7 +330,7 @@ class IceCave {
  * @example
  * const IceCave = require('icecave');
  *
- * const storage = IceCave.create('./data-directory', 'storage');
+ * const storage = require('icecave').create(__dirname + '/data-directory');
  *
  * storage.push({ id: 1, name: 'Adam' });
  */

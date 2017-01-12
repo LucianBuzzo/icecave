@@ -21,7 +21,7 @@ Below is a quick example how to use IceCave DB:
 const IceCave = require('icecave');
 
 // Create a new storage instance that will be written to the directory './data-directory'
-const storage = IceCave.create('./data-directory', 'storage');
+const storage = require('icecave').create(__dirname + '/data-directory');
 
 // Add items to the database
 storage.push({ id: 1, name: 'Adam' });

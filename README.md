@@ -21,7 +21,7 @@ Below is a quick example how to use IceCave DB:
 const IceCave = require('icecave');
 
 // Create a new storage instance that will be written to the directory './data-directory'
-const storage = IceCave.create('./data-directory', 'storage');
+const storage = require('icecave').create(__dirname + '/data-directory');
 
 // Add items to the database
 storage.push({ id: 1, name: 'Adam' });
@@ -53,7 +53,7 @@ Creates and returns a new IceCave instance. The instance will writedata to the 
 
 **Example**  
 ```js
-const IceCave = require('icecave');const storage = IceCave.create('./data-directory', 'storage');storage.push({ id: 1, name: 'Adam' });
+const IceCave = require('icecave');const storage = require('icecave').create(__dirname + '/data-directory');storage.push({ id: 1, name: 'Adam' });
 ```
 
 <a name="IceCave"></a>
@@ -90,7 +90,7 @@ IceCave stores data in memory in an Immutable JS "list" structure(similar to an
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');
+const storage = require('icecave').create(__dirname + '/data-directory');
 ```
 <a name="IceCave.push"></a>
 
@@ -106,7 +106,7 @@ const storage = require('icecave').create('./data-directory');
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });
+const storage = require('icecave').create(__dirname + '/data-directory');let index = storage.push({ foo: 'bar' });
 ```
 <a name="IceCave.remove"></a>
 
@@ -121,7 +121,7 @@ const storage = require('icecave').create('./data-directory');let index = stor
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });// ...storage.remove(index);
+const storage = require('icecave').create(__dirname + '/data-directory');let index = storage.push({ foo: 'bar' });// ...storage.remove(index);
 ```
 <a name="IceCave.set"></a>
 
@@ -137,7 +137,7 @@ const storage = require('icecave').create('./data-directory');let index = stor
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });// ...storage.set(index, { hello: 'world' });
+const storage = require('icecave').create(__dirname + '/data-directory');let index = storage.push({ foo: 'bar' });// ...storage.set(index, { hello: 'world' });
 ```
 <a name="IceCave.get"></a>
 
@@ -153,7 +153,7 @@ const storage = require('icecave').create('./data-directory');let index = stor
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');let index = storage.push({ foo: 'bar' });// ...storage.get(index); // --> { foo: 'bar' }
+const storage = require('icecave').create(__dirname + '/data-directory');let index = storage.push({ foo: 'bar' });// ...storage.get(index); // --> { foo: 'bar' }
 ```
 <a name="IceCave.find"></a>
 
@@ -169,7 +169,7 @@ const storage = require('icecave').create('./data-directory');let index = stor
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const user = storage.find(item => item.id === 2); // --> { id: 2, name: 'Ben' }
+const storage = require('icecave').create(__dirname + '/data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const user = storage.find(item => item.id === 2); // --> { id: 2, name: 'Ben' }
 ```
 <a name="IceCave.findIndex"></a>
 
@@ -185,7 +185,7 @@ const storage = require('icecave').create('./data-directory');storage.push({ i
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const user = storage.findIndex(item => item.id === 2); // --> 1
+const storage = require('icecave').create(__dirname + '/data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const user = storage.findIndex(item => item.id === 2); // --> 1
 ```
 <a name="IceCave.filter"></a>
 
@@ -201,7 +201,7 @@ const storage = require('icecave').create('./data-directory');storage.push({ i
 
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.filter(item => item.id > 1); // --> [{ id: 2, name: 'Ben' }, { id: 3, name: 'Chris' }]
+const storage = require('icecave').create(__dirname + '/data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.filter(item => item.id > 1); // --> [{ id: 2, name: 'Ben' }, { id: 3, name: 'Chris' }]
 ```
 <a name="IceCave.first"></a>
 
@@ -212,7 +212,7 @@ const storage = require('icecave').create('./data-directory');storage.push({ i
 **Access:** public  
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.first(); // --> { id: 1, name: 'Adam' }
+const storage = require('icecave').create(__dirname + '/data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.first(); // --> { id: 1, name: 'Adam' }
 ```
 <a name="IceCave.last"></a>
 
@@ -223,6 +223,6 @@ const storage = require('icecave').create('./data-directory');storage.push({ i
 **Access:** public  
 **Example**  
 ```js
-const storage = require('icecave').create('./data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.last(); // --> { id: 3, name: 'Chris' }
+const storage = require('icecave').create(__dirname + '/data-directory');storage.push({ id: 1, name: 'Adam' });storage.push({ id: 2, name: 'Ben' });storage.push({ id: 3, name: 'Chris' });// ...const users = storage.last(); // --> { id: 3, name: 'Chris' }
 ```
 
