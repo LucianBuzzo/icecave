@@ -4,50 +4,72 @@
 [![npm version](https://badge.fury.io/js/icecave.svg)](http://badge.fury.io/js/icecave)
 [![Dependency Status](https://img.shields.io/david/LucianBuzzo/IceCave-DB.svg)](https://david-dm.org/LucianBuzzo/IceCave-DB)
 
-A super lightweight flat file storage system for nodejs.
+A lightweight flat file storage system for nodejs.
+
+Query using [JSON schema](https://json-schema.org/) and update using [JSON patch](https://tools.ietf.org/html/rfc6902).
 
 IceCave is designed for use in applications where relatively small amounts of
-data need to be permanently stored and a dedicated external database service is
-impractical or overkill.
+data (less than 10000 elements) need to be stored persistently and a dedicated
+external database service is impractical or overkill.
 IceCave stores data in-memory and periodically dumps it's contents to
 a JSON file. On startup it will read this file location and load any data found
 there.
 
-IceCave stores data in an array-like collection and its API methods reflect that.
-IceCave intentionally offers a very limited set of methods and leaves it up to you,
-the developer, to build integrations that suit your application.
-
 # Usage
 
-Below is a quick example how to use IceCave DB:
+Below is an example how to use IceCave DB:
 
 ```js
 const IceCave = require('icecave');
 
 // Create a new storage instance that will be written to the directory './data-directory'
-const storage = require('icecave').create(__dirname + '/data-directory');
+const db = new IceCave({
+  directory: __dirname + '/data-directory',
+})
 
-// Add items to the database
-storage.push({ id: 1, name: 'Adam' });
-storage.push({ id: 2, name: 'Ben' });
-storage.push({ id: 3, name: 'Chris' });
+// Add elements to the database
+db.insert({ id: 1, name: 'Abra' })
+db.insert({ id: 2, name: 'Bulbasaur' })
+db.insert({ id: 3, name: 'Caterpie' })
 
-// Find an item in the database
-const user = storage.find(item => item.id === 2); // --> { id: 2, name: 'Ben' }
+// Find an element
+const user = db.query({
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      const: 2
+    }
+  }
+}) // --> { id: 2, name: 'Bulbasaur' }
+
+// Update an element
+const user = db.update({
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      const: 2
+    }
+  }
+}, [
+  { op: 'replace', path: '/name', value: 'Beedrill' },
+  { op: 'add', path: '/type', value: [ 'bug', 'poison' ] }
+]) // --> { id: 2, name: 'Beedrill', type: [ 'bug', 'poison' ] }
+
+// Delete an element
+const user = db.delete({
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      const: 3
+    }
+  }
+})
 ```
 
 # Documentation
-
-## Module interface
-
-{{#module name="icecave"}}
-{{>body~}}
-{{>member-index~}}
-{{>separator~}}
-{{>members~}}
-{{/module}}
-
-<a name="IceCave"></a>
 
 ## IceCave instance
 

@@ -10,24 +10,42 @@
     "storage",
     "immutable"
   ],
-  "main": "icecave.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "node tests/icecave.test.js",
+    "test": "npm run cleanup && nyc --reporter=lcov ava -v",
     "lint": "standard",
     "ci": "npm run lint && npm run test",
-    "readme": "jsdoc2md --template doc/README.hbs icecave.js > README.md"
+    "cleanup": "./test/cleanup-test-files.js",
+    "benchmark": "node perf/benchmark.js",
+    "readme": "jsdoc2md --template doc/README.hbs lib/index.js > README.md"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LucianBuzzo/IceCave-DB.git"
+    "url": "git+https://github.com/LucianBuzzo/icecave.git"
   },
   "author": "Lucian Buzzo <lucian.buzzo@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "immutable": "^3.7.6"
-  },
   "devDependencies": {
+    "ava": "^1.0.1",
+    "benchmark": "^2.1.4",
+    "jsdoc-to-markdown": "^4.0.1",
+    "nyc": "^13.1.0",
     "standard": "^12.0.1",
-    "tape": "^4.6.3"
+    "uuid": "^3.3.2"
+  },
+  "ava": {
+    "timeout": "5m",
+    "verbose": true,
+    "concurrency": 3,
+    "failWithoutAssertions": true,
+    "files": [
+      "test/**/*.spec.js"
+    ]
+  },
+  "dependencies": {
+    "ajv": "^6.6.2",
+    "deep-copy": "^1.4.2",
+    "fast-memoize": "^2.5.1",
+    "jsonpatch": "^3.0.1"
   }
 }
