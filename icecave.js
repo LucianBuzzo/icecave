@@ -1,8 +1,7 @@
-const Immutable = require('immutable');
-const fs = require('fs');
+const Immutable = require('immutable')
+const fs = require('fs')
 
 class IceCave {
-
   /**
    * @summary Create an instance of IceCave
    * @name IceCave
@@ -26,16 +25,12 @@ class IceCave {
    * @example
    * const storage = require('icecave').create(__dirname + '/data-directory');
    */
-  constructor(dir, name) {
+  constructor (dir, name) {
     if (!fs.existsSync(dir)) {
-      throw new Error(`Whoops! The directory "${dir}" doesn't exist. Please create it and try again.`);
+      throw new Error(`Whoops! The directory "${dir}" doesn't exist. Please create it and try again.`)
     }
 
-    const writeInterval = 1000;
-
-    const getName = () => name;
-    const getDir = () => dir;
-
+    const writeInterval = 1000
 
     /**
      * @desc The source data used to seed this DB instance. If the data file is not
@@ -46,22 +41,22 @@ class IceCave {
      */
     const data = (() => {
       try {
-        let flatFileData = fs.readFileSync(`${dir}/${name}.json`, 'utf8');
-        let parsed = JSON.parse(flatFileData);
-        console.log(`IceCave: Loading data from ${dir}/${name}.json`);
-        return parsed;
-      } catch(e) {
-        console.log(`IceCave: No storage file found at ${dir}/${name}.json, starting a new collection`);
-        return [];
+        let flatFileData = fs.readFileSync(`${dir}/${name}.json`, 'utf8')
+        let parsed = JSON.parse(flatFileData)
+        console.log(`IceCave: Loading data from ${dir}/${name}.json`)
+        return parsed
+      } catch (e) {
+        console.log(`IceCave: No storage file found at ${dir}/${name}.json, starting a new collection`)
+        return []
       }
-    })();
+    })()
 
     /**
      * @desc In memory data storage for this DB instance. Uses an immutable
      * list.
      * {@link https://facebook.github.io/immutable-js/docs/#/List}
      */
-    let core = Immutable.fromJS(data);
+    let core = Immutable.fromJS(data)
 
     /**
      * @desc Converts immutable data structures to plain JS.
@@ -76,8 +71,8 @@ class IceCave {
      * unpack(struct); // --> { foo: 'bar' }
      */
     const unpack = (item) => {
-      return item.toJS ? item.toJS() : item;
-    };
+      return item.toJS ? item.toJS() : item
+    }
 
     /**
      * @summary Adds a value as the last item in the DB
@@ -95,9 +90,9 @@ class IceCave {
      * let index = storage.push({ foo: 'bar' });
      */
     const push = (val) => {
-      core = core.push(Immutable.fromJS(val));
-      return core.size - 1;
-    };
+      core = core.push(Immutable.fromJS(val))
+      return core.size - 1
+    }
 
     /**
      * @summary Deletes the value at 'index'.
@@ -119,8 +114,8 @@ class IceCave {
      * storage.remove(index);
      */
     const remove = (index) => {
-      core = core.delete(index);
-    };
+      core = core.delete(index)
+    }
 
     /**
      * @summary Sets a new value at 'index'.
@@ -143,8 +138,8 @@ class IceCave {
      * storage.set(index, { hello: 'world' });
      */
     const set = (index, val) => {
-      core = core.set(index, Immutable.fromJS(val));
-    };
+      core = core.set(index, Immutable.fromJS(val))
+    }
 
     /**
      * @summary Retrieves the value at 'index'.
@@ -165,7 +160,7 @@ class IceCave {
      *
      * storage.get(index); // --> { foo: 'bar' }
      */
-    const get = (index) => unpack(core.get(index));
+    const get = (index) => unpack(core.get(index))
 
     /**
      * @summary Returns the first value for which the predicate 'fn' returns true.
@@ -189,7 +184,7 @@ class IceCave {
      *
      * const user = storage.find(item => item.id === 2); // --> { id: 2, name: 'Ben' }
      */
-    const find = (fn) => unpack(core.find((item) => fn(unpack(item))));
+    const find = (fn) => unpack(core.find((item) => fn(unpack(item))))
 
     /**
      * @summary Returns the first index where a value satisfies the provided predicate 'fn'
@@ -213,7 +208,7 @@ class IceCave {
      *
      * const user = storage.findIndex(item => item.id === 2); // --> 1
      */
-    const findIndex = (fn) => unpack(core.findIndex((item) => fn(unpack(item))));
+    const findIndex = (fn) => unpack(core.findIndex((item) => fn(unpack(item))))
 
     /**
      * @summary Returns all values for which the predicate 'fn' returns true.
@@ -237,7 +232,7 @@ class IceCave {
      *
      * const users = storage.filter(item => item.id > 1); // --> [{ id: 2, name: 'Ben' }, { id: 3, name: 'Chris' }]
      */
-    const filter = (fn) => unpack(core.filter((item) => fn(unpack(item))));
+    const filter = (fn) => unpack(core.filter((item) => fn(unpack(item))))
 
     /**
      * @summary Returns the first value in storage
@@ -258,7 +253,7 @@ class IceCave {
      *
      * const users = storage.first(); // --> { id: 1, name: 'Adam' }
      */
-    const first = () => unpack(core.first());
+    const first = () => unpack(core.first())
 
     /**
      * @summary Returns the last value in storage
@@ -279,17 +274,17 @@ class IceCave {
      *
      * const users = storage.last(); // --> { id: 3, name: 'Chris' }
      */
-    const last = () => unpack(core.last());
+    const last = () => unpack(core.last())
 
     /**
      * @summary Writes the in memory storage to a JSON file.
      * @private
      */
     const write = () => {
-      fs.writeFile(`${dir}/${name}.json`, JSON.stringify(core.toJS()));
-    };
+      fs.writeFile(`${dir}/${name}.json`, JSON.stringify(core.toJS()))
+    }
 
-    setInterval(write, writeInterval);
+    setInterval(write, writeInterval)
 
     return {
       push,
@@ -297,10 +292,11 @@ class IceCave {
       get: get,
       set: set,
       find,
+      findIndex,
       filter,
       first,
-      last,
-    };
+      last
+    }
   }
 }
 
@@ -335,6 +331,5 @@ class IceCave {
  * storage.push({ id: 1, name: 'Adam' });
  */
 exports.create = (dir, name = 'icecave') => {
-  return new IceCave(dir, name);
+  return new IceCave(dir, name)
 }
-
