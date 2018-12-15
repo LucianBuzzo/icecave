@@ -1,5 +1,10 @@
 # IceCave DB
 
+[![Build Status](https://travis-ci.org/LucianBuzzo/IceCave-DB.svg?branch=master)](https://travis-ci.org/LucianBuzzo/IceCave-DB)
+[![npm version](https://badge.fury.io/js/IceCave-DB.svg)](http://badge.fury.io/js/IceCave-DB)
+[![Dependency Status](https://img.shields.io/david/LucianBuzzo/IceCave-DB.svg)](https://david-dm.org/LucianBuzzo/IceCave-DB)
+
+
 A super lightweight flat file storage system for nodejs.
 
 IceCave is designed for use in applications where relatively small amounts of
