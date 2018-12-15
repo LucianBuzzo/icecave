@@ -13,6 +13,8 @@
   "main": "icecave.js",
   "scripts": {
     "test": "node tests/icecave.test.js",
+    "lint": "standard",
+    "ci": "npm run lint && npm run test",
     "readme": "jsdoc2md --template doc/README.hbs icecave.js > README.md"
   },
   "repository": {
@@ -25,6 +27,7 @@
     "immutable": "^3.7.6"
   },
   "devDependencies": {
+    "standard": "^12.0.1",
     "tape": "^4.6.3"
   }
 }
