@@ -1,6 +1,6 @@
 {
   "name": "icecave",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Fast and simple flat file storage for small projects",
   "keywords": [
     "flatfile",
