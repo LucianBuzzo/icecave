@@ -259,4 +259,3 @@ const db = new IceCave()
 
 await db.shutdown()
 ```
-
