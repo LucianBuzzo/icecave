@@ -8,6 +8,7 @@ A lightweight flat file storage system for nodejs.
 
 Query using [JSON schema](https://json-schema.org/) and update using [JSON patch](https://tools.ietf.org/html/rfc6902).
 
+
 IceCave is designed for use in applications where relatively small amounts of
 data (less than 10000 elements) need to be stored persistently and a dedicated
 external database service is impractical or overkill.
@@ -73,9 +74,9 @@ const user = db.delete({
 
 ## IceCave instance
 
-**Kind**: global class  
-**Summary**: Create an instance of IceCave  
-**Access**: public  
+**Kind**: global class
+**Summary**: Create an instance of IceCave
+**Access**: public
 
 * [IceCave](#IceCave)
     * [new IceCave(config)](#new_IceCave_new)
@@ -97,7 +98,7 @@ const user = db.delete({
 | [config.name] | <code>String</code> | <code>icecave</code> | The name of this instance |
 | [config.memoryOnly] | <code>Boolean</code> | <code>false</code> | Set to true to stop the db from being written to the filesystem |
 
-**Example**  
+**Example**
 ```js
 const db = new IceCave()
 ```
@@ -106,11 +107,11 @@ const db = new IceCave()
 ### iceCave.dump() ⇒ <code>Promise.&lt;String&gt;</code>
 Dumps the store to a JSON file and shuts down the DB
 
-**Kind**: instance method of [<code>IceCave</code>](#IceCave)  
-**Summary**: Writes the in memory storage to a JSON file.  
-**Returns**: <code>Promise.&lt;String&gt;</code> - The path of the stored JSON file  
-**Access**: public  
-**Example**  
+**Kind**: instance method of [<code>IceCave</code>](#IceCave)
+**Summary**: Writes the in memory storage to a JSON file.
+**Returns**: <code>Promise.&lt;String&gt;</code> - The path of the stored JSON file
+**Access**: public
+**Example**
 ```js
 const db = new IceCave()
 
@@ -121,14 +122,14 @@ await db.dump()
 ### iceCave.insert(element)
 Insert an element into the database
 
-**Kind**: instance method of [<code>IceCave</code>](#IceCave)  
-**Access**: public  
+**Kind**: instance method of [<code>IceCave</code>](#IceCave)
+**Access**: public
 
 | Param | Type | Description |
 | --- | --- | --- |
 | element | <code>Object</code> | The element to insert |
 
-**Example**  
+**Example**
 ```js
 const db = new IceCave()
 
@@ -142,14 +143,14 @@ db.insert({
 ### iceCave.delete(query)
 Delete elements in the store the match a JSON schema.
 
-**Kind**: instance method of [<code>IceCave</code>](#IceCave)  
-**Access**: public  
+**Kind**: instance method of [<code>IceCave</code>](#IceCave)
+**Access**: public
 
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>Object</code> | The JSON schema to validate against |
 
-**Example**  
+**Example**
 ```js
 const db = new IceCave()
 
@@ -172,15 +173,15 @@ db.delete({
 ### iceCave.filter(query) ⇒ <code>Array</code>
 Retrieve elements in the store that match a JSON schema.
 
-**Kind**: instance method of [<code>IceCave</code>](#IceCave)  
-**Returns**: <code>Array</code> - An array of elements  
-**Access**: public  
+**Kind**: instance method of [<code>IceCave</code>](#IceCave)
+**Returns**: <code>Array</code> - An array of elements
+**Access**: public
 
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>Object</code> | The JSON schema to validate against |
 
-**Example**  
+**Example**
 ```js
 const db = new IceCave()
 
@@ -206,17 +207,17 @@ console.log(results)
 Select elements that match a JSON schema and update them
 using a JSON patch object.
 
-**Kind**: instance method of [<code>IceCave</code>](#IceCave)  
-**Summary**: Update one or more elements  
-**Access**: public  
-**See**: https://tools.ietf.org/html/rfc6902  
+**Kind**: instance method of [<code>IceCave</code>](#IceCave)
+**Summary**: Update one or more elements
+**Access**: public
+**See**: https://tools.ietf.org/html/rfc6902
 
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>Object</code> | The JSON schema to validate against |
 | patch | <code>Object</code> | An RFC 6902 JSON patch object |
 
-**Example**  
+**Example**
 ```js
 const db = new IceCave()
 
@@ -242,10 +243,10 @@ db.update({
 ### iceCave.shutdown() ⇒ <code>Promise</code>
 Dumps the store to a JSON file and shuts down the DB
 
-**Kind**: instance method of [<code>IceCave</code>](#IceCave)  
-**Summary**: Shutdown the database  
-**Access**: public  
-**Example**  
+**Kind**: instance method of [<code>IceCave</code>](#IceCave)
+**Summary**: Shutdown the database
+**Access**: public
+**Example**
 ```js
 const db = new IceCave()
 
