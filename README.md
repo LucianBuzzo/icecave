@@ -16,6 +16,7 @@ Highlights
 Motivation
 ----------
 
+
 IceCave is designed for use in applications where relatively small amounts of
 data (less than 10000 elements) need to be stored persistently and a dedicated
 external database service is impractical or overkill.
