@@ -43,7 +43,7 @@
     ]
   },
   "dependencies": {
-    "ajv": "^6.6.2",
+    "ajv": "^6.12.3",
     "deep-copy": "^1.4.2",
     "fast-memoize": "^2.5.1",
     "jsonpatch": "^3.0.1"
