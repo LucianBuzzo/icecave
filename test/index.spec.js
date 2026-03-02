@@ -1,6 +1,6 @@
 const ava = require('ava')
 const path = require('path')
-const uuid = require('uuid/v4')
+const { v4: uuid } = require('uuid')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const IceCave = require('..')
