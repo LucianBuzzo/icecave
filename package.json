@@ -15,7 +15,7 @@
     "test": "npm run cleanup && nyc --reporter=lcov ava -v",
     "lint": "standard",
     "ci": "npm run lint && npm run test",
-    "cleanup": "./test/cleanup-test-files.js",
+    "cleanup": "node ./test/cleanup-test-files.js",
     "benchmark": "node perf/benchmark.js",
     "readme": "jsdoc2md --template doc/README.hbs lib/index.js > README.md"
   },
